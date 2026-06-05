@@ -13,17 +13,22 @@
 
 ## 当前状态
 
-PR 1 已完成 Node / Next.js 项目初始化。PR 2 优化了首页视觉和项目文档。
+PR 1 已完成 Node / Next.js 项目初始化。PR 2 优化了首页视觉和项目文档。PR 3 完成了小说输入、章节识别和至少 3 章的数量校验。
 
-当前 PR 3 完成小说输入与章节处理：
+当前 PR 4 完成 YAML Schema 设计说明：
 
-- 新增小说文本输入区域。
-- 新增“填入示例文本”和“检查章节”按钮。
-- 新增章节标题识别与章节数量校验。
-- 新增原创示例小说文本。
-- 在首页展示识别到的章节数量、章节标题和每章正文非空字符数。
+- 新增 `schema/script.schema.yaml`，定义 `script -> chapter -> scene -> beat` 三级剧本结构。
+- 新增 `docs/schema-design.md`，说明字段类型、作用和设计原因。
+- 新增 `data/sample-script.yaml`，提供一章两场景的示例剧本数据。
+- 为后续 AI 漫剧分镜和视频生成保留 `duration`、`camera_hint`、`sound_hint` 等提示字段。
 
-当前阶段不包含 AI 调用、YAML 生成、剧本预览或真实小说转剧本逻辑。
+当前阶段不包含自动生成 YAML、AI 调用、剧本预览或真实小说转剧本逻辑。
+
+## YAML Schema
+
+- Schema 文件：[schema/script.schema.yaml](schema/script.schema.yaml)
+- 字段说明：[docs/schema-design.md](docs/schema-design.md)
+- 示例数据：[data/sample-script.yaml](data/sample-script.yaml)
 
 ## 本地运行
 
@@ -53,6 +58,7 @@ components/   可复用 UI 组件
 lib/          工具函数与业务逻辑模块
 data/         示例数据与静态数据
 docs/         项目文档
+schema/       YAML Schema 定义
 ```
 
 ## 持续 PR 开发计划
@@ -71,10 +77,10 @@ docs/         项目文档
 - `tailwindcss`、`postcss`、`autoprefixer`：用于页面样式开发。
 - `eslint`、`eslint-config-next`：用于基础代码规范检查。
 
-PR 3 未新增第三方依赖。
+PR 4 未新增第三方依赖。
 
 后续如果引入 YAML、Schema 校验、AI SDK 或其他第三方库，会在本节补充库名、用途和必要性。
 
 ## AI 辅助开发说明
 
-当前阶段使用 AI 工具辅助设计章节解析规则、组件拆分和提示文案。代码整合、测试和最终提交由本人完成。
+当前阶段使用 AI 工具辅助梳理 Schema 草稿和文档表述。YAML 字段设计、字段取舍、文件整合、检查和最终提交由本人完成。

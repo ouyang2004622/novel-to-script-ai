@@ -1,8 +1,8 @@
 # AI 小说转剧本工具
 
-七牛云 x XEngineer 暑期实训营第三批次题目三：AI 小说转剧本工具。
+<img src="./public/readme-hero.png" alt="novel-to-script-ai 项目横幅" width="100%" />
 
-本项目是一个面向作者的小说改编 Web 工具，用于将 3 个章节以上的小说文本整理为结构化剧本草稿，并以 YAML 格式承载剧本结构。剧本结构优先服务于小说改编，也为后续分镜、视频生成和示例导出保留扩展空间。
+本项目是一个面向作者的小说改编 Web 工具，用于将 3 个章节以上的小说文本整理为结构化剧本草稿，并以 YAML 格式承载剧本结构。剧本结构优先服务于小说改编，也可作为当下热门的 ai视频生成的剧本、分镜、提示词的直接参考。
 
 ## 功能入口
 
@@ -106,10 +106,11 @@ schema/       YAML Schema 定义
 - `react`、`react-dom`：用于构建页面组件。
 - `typescript`：用于提供类型约束。
 - `tailwindcss`、`postcss`、`autoprefixer`：用于页面样式开发。
-- `eslint`、`eslint-config-next`：用于基础代码规范检查。
+- `eslint`、`eslint-config-next`、`@eslint/eslintrc`：用于基础代码规范检查。
 - `openai`：用于以 OpenAI 兼容格式调用 DeepSeek API。
 - `js-yaml`：用于把结构化剧本 JSON 转换成 YAML 文本。
 - `@types/js-yaml`：用于提供 `js-yaml` 的 TypeScript 类型。
+- `@types/node`、`@types/react`、`@types/react-dom`：用于提供 Node.js 和 React 相关类型声明。
 
 ## 开发辅助说明
 

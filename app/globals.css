@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  color: #171717;
-  background: #f7f7f2;
+  color: #f8fafc;
+  background: #060814;
 }
 
 * {
@@ -14,8 +14,112 @@
 body {
   min-height: 100vh;
   margin: 0;
+  background: #060814;
+}
+
+button {
+  font: inherit;
+}
+
+.aurora-layer,
+.grid-layer,
+.scan-layer {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+
+.aurora-layer {
   background:
-    linear-gradient(135deg, rgba(230, 0, 18, 0.08), transparent 34%),
-    linear-gradient(315deg, rgba(14, 116, 144, 0.12), transparent 30%),
-    #f7f7f2;
+    radial-gradient(circle at 18% 24%, rgba(34, 211, 238, 0.26), transparent 28%),
+    radial-gradient(circle at 78% 18%, rgba(167, 139, 250, 0.28), transparent 30%),
+    radial-gradient(circle at 52% 78%, rgba(16, 185, 129, 0.16), transparent 34%);
+  filter: blur(18px);
+  animation: aurora-drift 12s ease-in-out infinite alternate;
+}
+
+.grid-layer {
+  opacity: 0.42;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.14) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 86%);
+  animation: grid-float 18s linear infinite;
+}
+
+.scan-layer {
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(34, 211, 238, 0.08),
+    transparent
+  );
+  height: 38%;
+  opacity: 0.7;
+  animation: scan-move 7s ease-in-out infinite;
+}
+
+.animate-slide-up {
+  animation: slide-up 720ms ease-out both;
+}
+
+.animate-fade-in {
+  animation: fade-in 900ms ease-out both;
+}
+
+@keyframes aurora-drift {
+  from {
+    transform: translate3d(-2%, -1%, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(2%, 2%, 0) scale(1.05);
+  }
+}
+
+@keyframes grid-float {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 48px 48px;
+  }
+}
+
+@keyframes scan-move {
+  0% {
+    transform: translateY(-45%);
+  }
+
+  50% {
+    transform: translateY(170%);
+  }
+
+  100% {
+    transform: translateY(-45%);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }

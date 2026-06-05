@@ -1,66 +1,63 @@
 # PR 开发计划
 
-本计划用于满足“持续 commit、按 PR 拆分功能、每个 PR 只做一件事”的提交要求。每个 PR 合并前都应包含明确标题、描述、测试方式和 commit message。
+本计划用于记录项目的分阶段开发节奏，满足“持续 commit、按 PR 拆分功能、每个 PR 只做一件事”的提交要求。后续阶段可以根据实现情况调整，不需要一次性锁死所有细节。
 
-## PR 1：Next.js 项目脚手架与提交规范说明
+每个 PR 合并前建议说明：
+
+- 本次做了什么。
+- 本次没有做什么。
+- 如何本地查看或验证。
+- 下一步计划是什么。
+
+## PR 1：Next.js 项目初始化
 
 - 分支：`codex/pr1-project-scaffold`
-- 目标：建立 Next.js + TypeScript + Tailwind CSS 项目骨架、基础首页、README、环境变量示例和 PR 计划文档。
-- 不包含：小说解析、AI 调用、YAML Schema、YAML 输出、剧本预览。
-- 建议 commit：`chore: scaffold nextjs project and submission docs`
+- 状态：已合并
+- 目标：建立 Next.js + TypeScript + Tailwind CSS 项目骨架。
+- 已完成：基础首页、项目目录、README、环境变量示例、Node 项目 `.gitignore`。
+- 未包含：小说解析、AI 调用、YAML 生成、剧本预览。
+- commit：`chore: scaffold nextjs project and submission docs`
 
-## PR 2：YAML Schema 与字段设计说明
+## PR 2：首页视觉优化与文档更新
 
-- 分支：`codex/pr2-yaml-schema-doc`
-- 目标：新增剧本 YAML Schema 和字段设计说明文档。
-- 主要文件：`schema/script.schema.yaml`、`docs/schema-design.md`、`examples/script.sample.yaml`。
-- 不包含：自动转换逻辑。
-- 建议 commit：`docs: add screenplay yaml schema design`
+- 分支：`codex/pr2-polish-homepage-pr-plan`
+- 状态：当前阶段
+- 目标：优化首页展示效果，并让文档更贴合当前开发进度。
+- 已完成：删除首页红色训练营标签，增加深色科技感视觉、动态背景、功能入口占位按钮，更新 README 和 PR 开发计划。
+- 未包含：小说解析、AI API 调用、YAML 生成、剧本预览、YAML Schema 修改。
+- commit：`feat: polish homepage and update PR plan`
 
-## PR 3：Web 输入页面与章节切分
+## 后续阶段：小说输入与章节处理
 
-- 分支：`codex/pr3-novel-input-parser`
-- 目标：新增小说文本输入区域，识别章节标题，并校验章节数不少于 3。
-- 主要文件：`app/`、`components/`、`lib/novel-parser.ts`。
-- 不包含：剧本生成和 AI 调用。
-- 建议 commit：`feat: parse novel input into chapters`
+- 建议分支：`codex/pr3-novel-input`
+- 目标：增加小说文本输入区域，支持识别章节标题，并校验章节数量不少于 3。
+- 可能涉及：`app/`、`components/`、`lib/novel-parser.ts`。
+- 暂不包含：AI 转换和 YAML 输出。
 
-## PR 4：规则版剧本转换 MVP
+## 后续阶段：YAML Schema 设计说明
 
-- 分支：`codex/pr4-rule-based-script-mvp`
-- 目标：实现不依赖 AI 的基础转换，把章节拆成场景、旁白和对白候选结构。
-- 主要文件：`lib/script-converter.ts`、`components/`。
-- 不包含：真实 AI provider。
-- 建议 commit：`feat: convert chapters to basic screenplay structure`
+- 建议分支：`codex/pr4-yaml-schema-doc`
+- 目标：设计剧本 YAML 结构，并补充字段说明文档。
+- 可能涉及：`schema/`、`docs/schema-design.md`、`data/`。
+- 暂不包含：自动生成 YAML 的业务逻辑。
 
-## PR 5：AI 调用抽象层与 prompt 模板
+## 后续阶段：基础转换流程
 
-- 分支：`codex/pr5-ai-adapter-prompts`
-- 目标：加入 AI provider 抽象、prompt 模板和 mock provider，便于后续接入真实模型。
-- 主要文件：`lib/ai/`、`docs/prompts.md`、`app/api/`。
-- 不包含：强依赖真实 API 的测试。
-- 建议 commit：`feat: add ai adapter and prompt templates`
+- 建议分支：`codex/pr5-basic-conversion-flow`
+- 目标：将已解析的章节转换为基础剧本结构，形成可预览的数据。
+- 可能涉及：`lib/`、`components/`。
+- 暂不包含：真实 AI API 调用。
 
-## PR 6：Web 端到端转换与 Schema 校验
+## 后续阶段：AI 辅助转换
 
-- 分支：`codex/pr6-schema-validation-cli`
-- 目标：串联输入、转换、YAML 输出和 Schema 校验，形成可运行 Web Demo 主流程。
-- 主要文件：`app/`、`components/`、`lib/yaml-writer.ts`、`lib/schema-validator.ts`。
-- 不包含：示例与最终展示整理。
-- 建议 commit：`feat: add end-to-end web conversion flow`
+- 建议分支：`codex/pr6-ai-adapter`
+- 目标：设计 AI 调用入口、提示词模板和 mock 流程，为真实 API 接入做准备。
+- 可能涉及：`lib/ai/`、`app/api/`、`docs/prompts.md`。
+- 暂不包含：依赖真实密钥才能通过的测试。
 
-## PR 7：示例、演示与文档补充
+## 后续阶段：YAML 输出与演示整理
 
-- 分支：`codex/pr7-examples-demo-docs`
-- 目标：补充 3 章以上示例小说、示例 YAML、运行说明、第三方库说明和常见问题。
-- 主要文件：`examples/`、`README.md`、`docs/demo.md`。
-- 不包含：大规模功能重构。
-- 建议 commit：`docs: add examples and demo guide`
-
-## PR 8：最终提交整理与测试补强
-
-- 分支：`codex/pr8-submission-polish`
-- 目标：整理最终提交清单，补足边界测试，检查 README、Schema 文档和示例输出一致性。
-- 主要文件：`README.md`、`docs/submission-checklist.md`、测试文件。
-- 不包含：新增大功能。
-- 建议 commit：`chore: polish submission materials`
+- 建议分支：`codex/pr7-yaml-output-demo`
+- 目标：完成 YAML 输出、示例数据、Demo 操作说明和最终提交清单。
+- 可能涉及：`components/`、`lib/`、`data/`、`docs/`、`README.md`。
+- 暂不包含：和当前目标无关的大规模重构。

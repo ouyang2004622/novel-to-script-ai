@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "AI 小说转剧本工具",
-  description: "七牛云 x XEngineer 暑期实训营第三批次题目三 Web Demo",
+  description: "面向小说改编场景的 AI 辅助剧本创作 Web Demo",
 };
 
 export default function RootLayout({

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "AI 小说转剧本工具",
-  description: "面向小说改编场景的 AI 辅助剧本创作 Web Demo",
+  title: "小说转剧本创作台",
+  description: "面向小说改编场景的结构化剧本创作工具",
 };
 
 export default function RootLayout({

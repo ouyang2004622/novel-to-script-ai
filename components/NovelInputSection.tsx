@@ -11,6 +11,18 @@ import type {
   ConvertScriptResponse,
 } from "@/lib/script-types";
 
+function formatConvertError(message: string) {
+  if (
+    message.includes("DEEPSEEK_API_KEY") ||
+    message.includes("MOCK_AI") ||
+    message.includes("DeepSeek")
+  ) {
+    return "剧本生成服务暂不可用，请检查本地服务配置后重试。";
+  }
+
+  return message;
+}
+
 export function NovelInputSection() {
   const [novelText, setNovelText] = useState("");
   const [parseResult, setParseResult] = useState<NovelParseResult | null>(null);
@@ -34,7 +46,7 @@ export function NovelInputSection() {
 
   async function handleGenerateScript() {
     if (!parseResult?.isValid) {
-      setConvertError("请先通过章节检查，再生成 AI 剧本草稿。");
+      setConvertError("请先通过章节检查，再生成剧本草稿。");
       return;
     }
 
@@ -64,11 +76,12 @@ export function NovelInputSection() {
 
       setScriptResult(data as ConvertScriptResponse);
     } catch (error) {
-      setConvertError(
+      const message =
         error instanceof Error
           ? error.message
-          : "生成剧本草稿时出现异常，请稍后重试。",
-      );
+          : "生成剧本草稿时出现异常，请稍后重试。";
+
+      setConvertError(formatConvertError(message));
     } finally {
       setIsConverting(false);
     }
@@ -86,7 +99,7 @@ export function NovelInputSection() {
               小说文本输入
             </h2>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300">
-              粘贴至少 3 个章节的小说文本，先检查章节标题和章节数量；通过校验后可生成 AI 辅助剧本草稿。
+              粘贴至少 3 个章节的小说文本，先检查章节标题和章节数量；通过校验后可生成结构化剧本草稿。
             </p>
           </div>
 
@@ -124,7 +137,7 @@ export function NovelInputSection() {
                 disabled={isConverting}
                 className="rounded-full border border-emerald-200/40 bg-emerald-300/15 px-5 py-3 text-sm font-semibold text-emerald-50 transition duration-300 hover:-translate-y-1 hover:border-emerald-100 hover:bg-emerald-300/25 hover:shadow-[0_0_40px_rgba(110,231,183,0.28)] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
               >
-                {isConverting ? "生成中..." : "生成 AI 剧本草稿"}
+                {isConverting ? "生成中..." : "生成剧本草稿"}
               </button>
             ) : null}
           </div>

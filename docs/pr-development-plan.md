@@ -1,65 +1,45 @@
-# PR 开发计划
+# 项目功能说明
 
-本计划用于记录项目的分阶段开发节奏，满足“持续 commit、按 PR 拆分功能、每个 PR 只做一件事”的提交要求。后续阶段可以根据实现情况调整，不需要一次性锁死所有细节。
+本文档用于说明项目的功能结构和后续可扩展方向，方便在作品提交和演示时快速了解系统组成。
 
-每个 PR 合并前建议说明：
+## 页面结构
 
-- 本次做了什么。
-- 本次没有做什么。
-- 如何本地查看或验证。
-- 下一步计划是什么。
+项目采用 Next.js App Router 管理页面，主要入口如下：
 
-## PR 1：Next.js 项目初始化
+| 页面 | 路由 | 作用 |
+| --- | --- | --- |
+| 首页 | `/` | 展示三个核心入口：开始转换小说、查看 YAML Schema、查看 Demo 示例。 |
+| 小说转换 | `/convert` | 输入小说文本，检查章节数量，生成剧本草稿并查看结构化预览。 |
+| Schema 说明 | `/schema` | 展示 YAML Schema 字段说明、设计原因，并提供 YAML 复制和下载。 |
+| Demo 示例 | `/demo` | 预留演示视频和示例作品链接位置。 |
 
-- 分支：`codex/pr1-project-scaffold`
-- 状态：已合并
-- 目标：建立 Next.js + TypeScript + Tailwind CSS 项目骨架。
-- 已完成：基础首页、项目目录、README、环境变量示例、Node 项目 `.gitignore`。
-- 未包含：小说解析、AI 调用、YAML 生成、剧本预览。
-- commit：`chore: scaffold nextjs project and submission docs`
+## 核心功能
 
-## PR 2：首页视觉优化与文档更新
+- 多章节小说输入：支持粘贴较长文本，并识别中文与英文形式的章节标题。
+- 章节校验：要求至少 3 个章节，未满足时给出友好提示。
+- 剧本草稿生成：将通过校验的小说内容整理为 `chapter / scene / beat` 结构。
+- 剧本结构预览：按章节分页展示角色、场景、节拍、镜头建议和声音建议。
+- YAML 查看：从结构化剧本对象生成 YAML 文本，便于后续保存和校验。
+- Schema 页面：把字段说明和设计原因整理为可阅读的页面，并支持下载 Schema 文件。
+- Demo 页面：预留视频展示区域，便于后续补充作品演示或操作录屏。
 
-- 分支：`codex/pr2-polish-homepage-pr-plan`
-- 状态：已合并
-- 目标：优化首页展示效果，并让文档更贴合当前开发进度。
-- 已完成：删除首页红色训练营标签，增加深色科技感视觉、动态背景、功能入口占位按钮，更新 README 和 PR 开发计划。
-- 未包含：小说解析、AI API 调用、YAML 生成、剧本预览、YAML Schema 修改。
-- commit：`feat: polish homepage and update PR plan`
+## 数据结构
 
-## PR 3：小说输入与章节处理
+剧本数据采用 `script -> chapter -> scene -> beat` 的层级结构：
 
-- 分支：`codex/pr3-novel-input`
-- 状态：已合并
-- 目标：增加小说文本输入区域，支持识别章节标题，并校验章节数量不少于 3。
-- 已完成：小说输入框、原创示例文本、章节解析工具、章节数量校验、章节列表展示。
-- 未包含：AI API 调用、YAML 生成、剧本预览、真实小说转剧本逻辑。
-- commit：`feat: add novel input and chapter parsing`
+- `script`：承载剧本标题、语言、来源和章节列表。
+- `chapter`：保留小说章节边界，便于追溯原文。
+- `scene`：组织场景地点、时间、人物和剧情作用。
+- `beat`：描述动作、对白、旁白、情绪和转场等最小叙事节拍。
 
-## PR 4：YAML Schema 设计说明
+## 后续可扩展方向
 
-- 分支：`codex/pr4-yaml-schema-doc`
-- 状态：已合并
-- 目标：设计剧本 YAML 结构，并补充字段说明文档。
-- 已完成：新增 `schema/script.schema.yaml`、`docs/schema-design.md`、`data/sample-script.yaml`，采用 `script -> chapter -> scene -> beat` 结构，并为分镜和视频生成预留镜头、声音、时长提示。
-- 未包含：自动生成 YAML 的业务逻辑、AI API 调用、剧本预览。
-- commit：`feat: add screenplay YAML schema and design doc`
+- YAML Schema 校验：在导出前检查字段完整性和类型一致性。
+- 文件导出：支持下载生成后的剧本 YAML 或示例包。
+- 提示词优化：针对不同小说类型调整剧本生成风格。
+- 演示内容补充：在 Demo 页面添加视频链接、操作录屏或示例作品。
+- 视频生成工作流：在已有剧本与分镜字段基础上继续扩展。
 
-## PR 5：DeepSeek 辅助基础转换流程
+## 提交节奏
 
-- 分支：`codex/pr5-deepseek-conversion-flow`
-- 状态：当前阶段
-- 目标：使用 DeepSeek API 将已解析的小说章节转换为结构化剧本草稿，并在页面中预览。
-- 已完成：新增 `/api/convert`、DeepSeek OpenAI 兼容调用模块、mock 模式、结构化剧本预览、YAML 查看与复制、首页创作流程状态更新。
-- 未包含：视频生成、账号系统、生产级提示词评测、多模型供应商管理。
-- commit：`feat: add deepseek script conversion flow`
-
-## 后续阶段：校验、导出与提示词优化
-
-- 可以继续完善 YAML Schema 校验、YAML 文件导出、示例导出和提示词效果优化。
-- 如果后续接入更多模型或视频生成工作流，建议单独拆分 PR，避免和当前转换流程混在一起。
-
-## 后续阶段：演示整理
-
-- 目标：补充 Demo 操作说明、最终提交清单和必要截图，确保作品提交材料清楚可复现。
-- 暂不包含：和演示整理无关的大规模重构。
+项目按功能拆分持续提交，每次合并集中解决一个清晰问题，避免一次性堆叠所有代码。后续如果新增校验、导出、演示视频或视频生成工作流，也会继续按独立功能拆分。

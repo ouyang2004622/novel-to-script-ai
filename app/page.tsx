@@ -1,4 +1,5 @@
 import { FeaturePlaceholder } from "@/components/FeaturePlaceholder";
+import { NovelInputSection } from "@/components/NovelInputSection";
 
 const upcomingFeatures = [
   "小说章节输入与章节数校验",
@@ -21,7 +22,7 @@ export default function Home() {
           <div className="animate-slide-up min-w-0 max-w-[calc(100vw-3rem)] space-y-7 sm:max-w-none">
             <div className="inline-flex items-center gap-3 rounded-full border border-cyan-300/30 bg-cyan-300/10 px-4 py-2 text-xs font-medium text-cyan-100 shadow-[0_0_30px_rgba(34,211,238,0.18)]">
               <span className="h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_16px_rgba(34,211,238,0.9)]" />
-              Web Demo 初始化阶段
+              PR 3 小说输入与章节处理
             </div>
 
             <div className="space-y-5">
@@ -29,8 +30,8 @@ export default function Home() {
                 AI 小说转剧本工具
               </h1>
               <p className="max-w-2xl break-words text-base leading-8 text-slate-300 sm:text-lg">
-                面向小说改编场景的创作辅助界面。后续将支持输入 3 个章节以上的小说文本，
-                整理为结构化剧本内容，并输出符合 Schema 约束的 YAML。
+                面向小说改编场景的创作辅助界面。当前阶段先支持小说文本输入、
+                章节标题识别和至少 3 章的数量校验，为后续剧本转换流程做准备。
               </p>
             </div>
 
@@ -51,10 +52,14 @@ export default function Home() {
           <FeaturePlaceholder items={upcomingFeatures} />
         </div>
 
+        <NovelInputSection />
+
         <section className="animate-fade-in max-w-[calc(100vw-3rem)] rounded-lg border border-white/10 bg-white/5 p-6 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur sm:max-w-none">
-          <h2 className="mb-3 text-xl font-semibold text-white">后续功能占位</h2>
+          <h2 className="mb-3 text-xl font-semibold text-white">
+            后续功能占位
+          </h2>
           <p className="max-w-3xl leading-7 text-slate-300">
-            本阶段只优化展示和文档。小说解析、AI 调用、YAML 生成和剧本预览会在后续 PR 中分阶段实现。
+            本阶段只处理小说输入和章节识别。AI 调用、YAML 生成、剧本预览和真实小说转剧本逻辑会在后续 PR 中继续推进。
           </p>
         </section>
       </section>

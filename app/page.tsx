@@ -1,11 +1,15 @@
 import { FeaturePlaceholder } from "@/components/FeaturePlaceholder";
 import { NovelInputSection } from "@/components/NovelInputSection";
+import type { FeatureFlowItem } from "@/components/FeaturePlaceholder";
 
-const upcomingFeatures = [
-  "小说章节输入与章节数校验",
-  "AI 辅助剧本结构化转换",
-  "YAML 输出与 Schema 校验",
-  "剧本预览与示例导出",
+const featureFlowItems: FeatureFlowItem[] = [
+  { label: "小说章节输入与章节数校验", status: "ready" },
+  { label: "YAML Schema 设计", status: "ready" },
+  { label: "DeepSeek 辅助剧本结构化转换", status: "ready" },
+  { label: "剧本结构预览", status: "ready" },
+  { label: "YAML Schema 校验", status: "planned" },
+  { label: "示例导出", status: "planned" },
+  { label: "视频生成工作流扩展", status: "planned" },
 ];
 
 const actionButtons = ["开始转换小说", "查看 YAML Schema", "查看 Demo 示例"];
@@ -22,7 +26,7 @@ export default function Home() {
           <div className="animate-slide-up min-w-0 max-w-[calc(100vw-3rem)] space-y-7 sm:max-w-none">
             <div className="inline-flex items-center gap-3 rounded-full border border-cyan-300/30 bg-cyan-300/10 px-4 py-2 text-xs font-medium text-cyan-100 shadow-[0_0_30px_rgba(34,211,238,0.18)]">
               <span className="h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_16px_rgba(34,211,238,0.9)]" />
-              PR 3 小说输入与章节处理
+              PR 5 DeepSeek 辅助转换流程
             </div>
 
             <div className="space-y-5">
@@ -30,8 +34,9 @@ export default function Home() {
                 AI 小说转剧本工具
               </h1>
               <p className="max-w-2xl break-words text-base leading-8 text-slate-300 sm:text-lg">
-                面向小说改编场景的创作辅助界面。当前阶段先支持小说文本输入、
-                章节标题识别和至少 3 章的数量校验，为后续剧本转换流程做准备。
+                面向作者的小说改编创作界面。当前阶段支持章节校验、
+                DeepSeek 辅助生成剧本草稿、结构化预览和 YAML 查看，
+                没有 API Key 时也能使用 mock 模式演示完整流程。
               </p>
             </div>
 
@@ -49,17 +54,18 @@ export default function Home() {
             </div>
           </div>
 
-          <FeaturePlaceholder items={upcomingFeatures} />
+          <FeaturePlaceholder items={featureFlowItems} />
         </div>
 
         <NovelInputSection />
 
         <section className="animate-fade-in max-w-[calc(100vw-3rem)] rounded-lg border border-white/10 bg-white/5 p-6 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur sm:max-w-none">
           <h2 className="mb-3 text-xl font-semibold text-white">
-            后续功能占位
+            项目定位
           </h2>
           <p className="max-w-3xl leading-7 text-slate-300">
-            本阶段只处理小说输入和章节识别。AI 调用、YAML 生成、剧本预览和真实小说转剧本逻辑会在后续 PR 中继续推进。
+            主要功能是帮助作者把小说内容改编为可阅读、可编辑的剧本草稿。后续可以继续扩展
+            Schema 校验、示例导出，以及面向 AI 视频生成和漫剧分镜的工作流。
           </p>
         </section>
       </section>

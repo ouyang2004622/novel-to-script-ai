@@ -39,29 +39,27 @@
 ## PR 4：YAML Schema 设计说明
 
 - 分支：`codex/pr4-yaml-schema-doc`
-- 状态：已完成本地实现
+- 状态：已合并
 - 目标：设计剧本 YAML 结构，并补充字段说明文档。
 - 已完成：新增 `schema/script.schema.yaml`、`docs/schema-design.md`、`data/sample-script.yaml`，采用 `script -> chapter -> scene -> beat` 结构，并为分镜和视频生成预留镜头、声音、时长提示。
 - 未包含：自动生成 YAML 的业务逻辑、AI API 调用、剧本预览。
 - commit：`feat: add screenplay YAML schema and design doc`
 
-## 后续阶段：基础转换流程
+## PR 5：DeepSeek 辅助基础转换流程
 
-- 建议分支：`codex/pr5-basic-conversion-flow`
-- 目标：将已解析的章节转换为基础剧本结构，形成可预览的数据。
-- 可能涉及：`lib/`、`components/`。
-- 暂不包含：真实 AI API 调用。
+- 分支：`codex/pr5-deepseek-conversion-flow`
+- 状态：当前阶段
+- 目标：使用 DeepSeek API 将已解析的小说章节转换为结构化剧本草稿，并在页面中预览。
+- 已完成：新增 `/api/convert`、DeepSeek OpenAI 兼容调用模块、mock 模式、结构化剧本预览、YAML 查看与复制、首页创作流程状态更新。
+- 未包含：视频生成、账号系统、生产级提示词评测、多模型供应商管理。
+- commit：`feat: add deepseek script conversion flow`
 
-## 后续阶段：AI 辅助转换
+## 后续阶段：校验、导出与提示词优化
 
-- 建议分支：`codex/pr6-ai-adapter`
-- 目标：设计 AI 调用入口、提示词模板和 mock 流程，为真实 API 接入做准备。
-- 可能涉及：`lib/ai/`、`app/api/`、`docs/prompts.md`。
-- 暂不包含：依赖真实密钥才能通过的测试。
+- 可以继续完善 YAML Schema 校验、YAML 文件导出、示例导出和提示词效果优化。
+- 如果后续接入更多模型或视频生成工作流，建议单独拆分 PR，避免和当前转换流程混在一起。
 
-## 后续阶段：YAML 输出与演示整理
+## 后续阶段：演示整理
 
-- 建议分支：`codex/pr7-yaml-output-demo`
-- 目标：完成 YAML 输出、示例数据、Demo 操作说明和最终提交清单。
-- 可能涉及：`components/`、`lib/`、`data/`、`docs/`、`README.md`。
-- 暂不包含：和当前目标无关的大规模重构。
+- 目标：补充 Demo 操作说明、最终提交清单和必要截图，确保作品提交材料清楚可复现。
+- 暂不包含：和演示整理无关的大规模重构。

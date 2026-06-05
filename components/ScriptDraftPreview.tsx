@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import type { ConvertScriptResponse, ScriptBeat } from "@/lib/script-types";
 
@@ -8,11 +8,6 @@ type ScriptDraftPreviewProps = {
   result: ConvertScriptResponse | null;
   error: string | null;
   isLoading: boolean;
-};
-
-const sourceLabel = {
-  mock: "Mock",
-  deepseek: "DeepSeek",
 };
 
 function BeatItem({ beat }: { beat: ScriptBeat }) {
@@ -58,6 +53,11 @@ export function ScriptDraftPreview({
   isLoading,
 }: ScriptDraftPreviewProps) {
   const [copyState, setCopyState] = useState("复制 YAML");
+  const [activeChapterIndex, setActiveChapterIndex] = useState(0);
+
+  useEffect(() => {
+    setActiveChapterIndex(0);
+  }, [result]);
 
   async function handleCopyYaml() {
     if (!result?.yamlText) {
@@ -95,6 +95,9 @@ export function ScriptDraftPreview({
   }
 
   const { script } = result.scriptObject;
+  const chapters = script.chapters;
+  const selectedChapter =
+    chapters[Math.min(activeChapterIndex, chapters.length - 1)];
 
   return (
     <section className="animate-fade-in space-y-6 rounded-lg border border-white/10 bg-white/5 p-6 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur">
@@ -111,7 +114,7 @@ export function ScriptDraftPreview({
           </p>
         </div>
         <span className="rounded-full border border-emerald-300/30 bg-emerald-300/10 px-4 py-2 text-xs font-semibold text-emerald-100">
-          数据来源：{sourceLabel[result.source]}
+          剧本草稿已生成
         </span>
       </div>
 
@@ -134,26 +137,45 @@ export function ScriptDraftPreview({
         ))}
       </div>
 
+      {chapters.length > 1 ? (
+        <div className="flex flex-wrap gap-2">
+          {chapters.map((chapter, index) => (
+            <button
+              key={chapter.chapter_id}
+              type="button"
+              onClick={() => setActiveChapterIndex(index)}
+              className={`rounded-full border px-4 py-2 text-xs font-semibold transition duration-300 ${
+                index === activeChapterIndex
+                  ? "border-cyan-200/60 bg-cyan-300/20 text-cyan-50"
+                  : "border-white/10 bg-white/5 text-slate-300 hover:border-cyan-200/40 hover:bg-cyan-300/10"
+              }`}
+            >
+              第 {chapter.chapter_id} 章
+            </button>
+          ))}
+        </div>
+      ) : null}
+
       <div className="space-y-5">
-        {script.chapters.map((chapter) => (
+        {selectedChapter ? (
           <article
-            key={chapter.chapter_id}
+            key={selectedChapter.chapter_id}
             className="rounded-lg border border-white/10 bg-slate-950/30 p-5"
           >
             <div className="mb-5">
               <p className="text-xs uppercase text-slate-500">
-                Chapter {chapter.chapter_id}
+                Chapter {selectedChapter.chapter_id}
               </p>
               <h3 className="mt-2 text-xl font-semibold text-white">
-                {chapter.chapter_title}
+                {selectedChapter.chapter_title}
               </h3>
               <p className="mt-3 text-sm leading-7 text-slate-300">
-                {chapter.summary}
+                {selectedChapter.summary}
               </p>
             </div>
 
             <div className="space-y-4">
-              {chapter.scenes.map((scene) => (
+              {selectedChapter.scenes.map((scene) => (
                 <section
                   key={scene.scene_id}
                   className="rounded-lg border border-cyan-300/15 bg-cyan-300/[0.06] p-4"
@@ -202,7 +224,7 @@ export function ScriptDraftPreview({
               ))}
             </div>
           </article>
-        ))}
+        ) : null}
       </div>
 
       <details className="rounded-lg border border-white/10 bg-slate-950/45 p-4">

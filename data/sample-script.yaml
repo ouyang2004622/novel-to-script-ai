@@ -1,0 +1,63 @@
+script:
+  title: "雾中灯塔"
+  source_type: novel
+  language: zh-CN
+  chapters:
+    - chapter_id: chapter-1
+      chapter_title: "第一章 雾中的站台"
+      summary: "林岚在旧城车站收到神秘车票，并被引向桥边旧书店。"
+      scenes:
+        - scene_id: scene-1
+          scene_title: "旧城车站的车票"
+          location: "旧城车站"
+          time: "night"
+          characters:
+            - "林岚"
+          scene_purpose: "建立悬疑氛围，让主角发现小说世界与现实重叠。"
+          beats:
+            - beat_id: beat-1
+              type: action
+              content: "林岚拖着行李箱走出月台，雨水沿着站牌滴落。"
+              duration: 4
+              camera_hint: "远景跟拍，缓慢推近到站牌"
+              sound_hint: "雨声、远处列车刹车声"
+            - beat_id: beat-2
+              type: emotion
+              character: "林岚"
+              content: "她看见车票背面的警告，表情从疑惑变成紧张。"
+              duration: 3
+              camera_hint: "面部特写，浅景深"
+              sound_hint: "低频悬疑音效"
+            - beat_id: beat-3
+              type: narration
+              content: "她第一次意识到，小说里的地名可能真实存在。"
+              duration: 3
+              camera_hint: "车票特写后切到空荡候车厅"
+        - scene_id: scene-2
+          scene_title: "桥边旧书店"
+          location: "镜河桥边旧书店"
+          time: "afternoon"
+          characters:
+            - "林岚"
+            - "陈叔"
+          scene_purpose: "交代关键线索，并把主角推向灯塔谜团。"
+          beats:
+            - beat_id: beat-4
+              type: action
+              content: "陈叔从柜台下取出一本没有署名的手稿，推到林岚面前。"
+              duration: 4
+              camera_hint: "手稿近景，镜头从柜台滑向林岚"
+              sound_hint: "旧门铃余音、纸张摩擦声"
+            - beat_id: beat-5
+              type: dialogue
+              character: "陈叔"
+              content: "这本手稿等的不是读者，是愿意改写结局的人。"
+              duration: 5
+              camera_hint: "陈叔半身近景，侧光"
+              sound_hint: "声音压低，背景音乐渐弱"
+            - beat_id: beat-6
+              type: transition
+              content: "画面从手稿最后一页的缺口切到远处亮起的灯塔。"
+              duration: 2
+              camera_hint: "匹配剪辑，纸页白边过渡到灯塔光束"
+              sound_hint: "翻页声转为灯塔机械声"

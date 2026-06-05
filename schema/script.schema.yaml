@@ -1,0 +1,150 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://github.com/ouyang2004622/novel-to-script-ai/schema/script.schema.yaml"
+title: ScreenplayYAML
+description: YAML structure for AI-assisted comic storyboard and video generation.
+type: object
+additionalProperties: false
+required:
+  - script
+properties:
+  script:
+    type: object
+    additionalProperties: false
+    required:
+      - title
+      - source_type
+      - language
+      - chapters
+    properties:
+      title:
+        type: string
+        minLength: 1
+        description: The screenplay title.
+      source_type:
+        type: string
+        enum:
+          - novel
+        description: The source content type.
+      language:
+        type: string
+        minLength: 2
+        description: Primary language of the screenplay.
+      chapters:
+        type: array
+        minItems: 1
+        description: Ordered chapters converted from the source novel.
+        items:
+          $ref: "#/$defs/chapter"
+$defs:
+  chapter:
+    type: object
+    additionalProperties: false
+    required:
+      - chapter_id
+      - chapter_title
+      - summary
+      - scenes
+    properties:
+      chapter_id:
+        type: string
+        minLength: 1
+        description: Stable chapter identifier, such as chapter-1.
+      chapter_title:
+        type: string
+        minLength: 1
+        description: Original or generated chapter title.
+      summary:
+        type: string
+        minLength: 1
+        description: Brief chapter-level summary.
+      scenes:
+        type: array
+        minItems: 1
+        description: Ordered scenes in this chapter.
+        items:
+          $ref: "#/$defs/scene"
+  scene:
+    type: object
+    additionalProperties: false
+    required:
+      - scene_id
+      - scene_title
+      - location
+      - time
+      - characters
+      - scene_purpose
+      - beats
+    properties:
+      scene_id:
+        type: string
+        minLength: 1
+        description: Stable scene identifier, such as scene-1.
+      scene_title:
+        type: string
+        minLength: 1
+        description: Short scene title for display and storyboard grouping.
+      location:
+        type: string
+        minLength: 1
+        description: Main location where the scene happens.
+      time:
+        type: string
+        minLength: 1
+        description: Scene time, such as night, morning, or unknown.
+      characters:
+        type: array
+        description: Characters appearing in this scene.
+        items:
+          type: string
+          minLength: 1
+      scene_purpose:
+        type: string
+        minLength: 1
+        description: Dramatic purpose of the scene.
+      beats:
+        type: array
+        minItems: 1
+        description: Ordered beat list for storyboard and video generation.
+        items:
+          $ref: "#/$defs/beat"
+  beat:
+    type: object
+    additionalProperties: false
+    required:
+      - beat_id
+      - type
+      - content
+    properties:
+      beat_id:
+        type: string
+        minLength: 1
+        description: Stable beat identifier, such as beat-1.
+      type:
+        type: string
+        enum:
+          - action
+          - dialogue
+          - narration
+          - emotion
+          - transition
+        description: Beat type used to guide visual and audio generation.
+      character:
+        type: string
+        minLength: 1
+        description: Character associated with the beat, mainly for dialogue or emotion.
+      content:
+        type: string
+        minLength: 1
+        description: Main beat content.
+      duration:
+        type: number
+        minimum: 0
+        description: Optional suggested duration in seconds.
+      camera_hint:
+        type: string
+        minLength: 1
+        description: Optional camera or framing hint for storyboard generation.
+      sound_hint:
+        type: string
+        minLength: 1
+        description: Optional sound or music hint for video generation.

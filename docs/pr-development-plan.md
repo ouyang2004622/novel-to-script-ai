@@ -30,18 +30,20 @@
 ## PR 3：小说输入与章节处理
 
 - 分支：`codex/pr3-novel-input`
-- 状态：已完成本地实现
+- 状态：已合并
 - 目标：增加小说文本输入区域，支持识别章节标题，并校验章节数量不少于 3。
 - 已完成：小说输入框、原创示例文本、章节解析工具、章节数量校验、章节列表展示。
 - 未包含：AI API 调用、YAML 生成、剧本预览、真实小说转剧本逻辑。
 - commit：`feat: add novel input and chapter parsing`
 
-## 后续阶段：YAML Schema 设计说明
+## PR 4：YAML Schema 设计说明
 
-- 建议分支：`codex/pr4-yaml-schema-doc`
+- 分支：`codex/pr4-yaml-schema-doc`
+- 状态：已完成本地实现
 - 目标：设计剧本 YAML 结构，并补充字段说明文档。
-- 可能涉及：`schema/`、`docs/schema-design.md`、`data/`。
-- 暂不包含：自动生成 YAML 的业务逻辑。
+- 已完成：新增 `schema/script.schema.yaml`、`docs/schema-design.md`、`data/sample-script.yaml`，采用 `script -> chapter -> scene -> beat` 结构，并为分镜和视频生成预留镜头、声音、时长提示。
+- 未包含：自动生成 YAML 的业务逻辑、AI API 调用、剧本预览。
+- commit：`feat: add screenplay YAML schema and design doc`
 
 ## 后续阶段：基础转换流程
 

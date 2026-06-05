@@ -21,18 +21,20 @@
 ## PR 2：首页视觉优化与文档更新
 
 - 分支：`codex/pr2-polish-homepage-pr-plan`
-- 状态：当前阶段
+- 状态：已合并
 - 目标：优化首页展示效果，并让文档更贴合当前开发进度。
 - 已完成：删除首页红色训练营标签，增加深色科技感视觉、动态背景、功能入口占位按钮，更新 README 和 PR 开发计划。
 - 未包含：小说解析、AI API 调用、YAML 生成、剧本预览、YAML Schema 修改。
 - commit：`feat: polish homepage and update PR plan`
 
-## 后续阶段：小说输入与章节处理
+## PR 3：小说输入与章节处理
 
-- 建议分支：`codex/pr3-novel-input`
+- 分支：`codex/pr3-novel-input`
+- 状态：已完成本地实现
 - 目标：增加小说文本输入区域，支持识别章节标题，并校验章节数量不少于 3。
-- 可能涉及：`app/`、`components/`、`lib/novel-parser.ts`。
-- 暂不包含：AI 转换和 YAML 输出。
+- 已完成：小说输入框、原创示例文本、章节解析工具、章节数量校验、章节列表展示。
+- 未包含：AI API 调用、YAML 生成、剧本预览、真实小说转剧本逻辑。
+- commit：`feat: add novel input and chapter parsing`
 
 ## 后续阶段：YAML Schema 设计说明
 

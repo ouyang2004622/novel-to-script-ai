@@ -74,6 +74,30 @@ export function ScriptDraftPreview({
     }
   }
 
+  function handleDownloadYaml() {
+    if (!result?.yamlText) {
+      return;
+    }
+
+    const safeTitle =
+      result.scriptObject.script.title
+        .trim()
+        .replace(/[\\/:*?"<>|]/g, "-")
+        .replace(/\s+/g, "-") || "script-draft";
+    const blob = new Blob([result.yamlText], {
+      type: "application/x-yaml;charset=utf-8",
+    });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+
+    anchor.href = url;
+    anchor.download = `${safeTitle}.yaml`;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    URL.revokeObjectURL(url);
+  }
+
   if (isLoading) {
     return (
       <section className="animate-fade-in rounded-lg border border-cyan-300/20 bg-cyan-300/10 p-6 text-cyan-50 shadow-[0_24px_80px_rgba(34,211,238,0.14)] backdrop-blur">
@@ -231,13 +255,20 @@ export function ScriptDraftPreview({
         <summary className="cursor-pointer text-sm font-semibold text-cyan-100">
           查看 YAML
         </summary>
-        <div className="mt-4 flex justify-end">
+        <div className="mt-4 flex flex-wrap justify-end gap-2">
           <button
             type="button"
             onClick={handleCopyYaml}
             className="rounded-full border border-cyan-200/30 bg-cyan-300/10 px-4 py-2 text-xs font-semibold text-cyan-50 transition duration-300 hover:-translate-y-0.5 hover:border-cyan-100 hover:bg-cyan-300/20"
           >
             {copyState}
+          </button>
+          <button
+            type="button"
+            onClick={handleDownloadYaml}
+            className="rounded-full border border-emerald-200/30 bg-emerald-300/10 px-4 py-2 text-xs font-semibold text-emerald-50 transition duration-300 hover:-translate-y-0.5 hover:border-emerald-100 hover:bg-emerald-300/20"
+          >
+            下载 YAML
           </button>
         </div>
         <pre className="mt-3 max-h-96 overflow-auto rounded-lg border border-white/10 bg-black/40 p-4 text-xs leading-6 text-slate-200">

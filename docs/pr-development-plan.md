@@ -1,45 +1,148 @@
-# 项目功能说明
+# PR 迭代记录与维护计划
 
-本文档用于说明项目的功能结构和后续可扩展方向，方便在作品提交和演示时快速了解系统组成。
+本项目按照“每个 PR 聚焦一个明确功能”的方式持续迭代。各阶段均保留独立分支、功能 commit、PR 标题和 PR 描述，避免在最后阶段一次性导入全部代码。
 
-## 页面结构
+## 已完成 PR
 
-项目采用 Next.js App Router 管理页面，主要入口如下：
+### PR 1：Next.js 项目初始化
 
-| 页面 | 路由 | 作用 |
-| --- | --- | --- |
-| 首页 | `/` | 展示三个核心入口：开始转换小说、查看 YAML Schema、查看 Demo 示例。 |
-| 小说转换 | `/convert` | 输入小说文本，检查章节数量，生成剧本草稿并查看结构化预览。 |
-| Schema 说明 | `/schema` | 展示 YAML Schema 字段说明、设计原因，并提供 YAML 复制和下载。 |
-| Demo 示例 | `/demo` | 预留演示视频和示例作品链接位置。 |
+- 分支：`codex/pr1-project-scaffold`
+- PR 标题：`chore: scaffold Next.js project and submission docs`
+- 状态：已合并
+- 完成内容：
+  - 初始化 Next.js、TypeScript、React 和 Tailwind CSS 项目。
+  - 建立 `app/`、`components/`、`lib/`、`data/`、`docs/` 等基础目录。
+  - 增加基础首页、README、`.env.example` 和 Node 项目 `.gitignore`。
+  - 明确项目本地运行方式和分阶段提交原则。
 
-## 核心功能
+### PR 2：首页视觉与文档优化
 
-- 多章节小说输入：支持粘贴较长文本，并识别中文与英文形式的章节标题。
-- 章节校验：要求至少 3 个章节，未满足时给出友好提示。
-- 剧本草稿生成：将通过校验的小说内容整理为 `chapter / scene / beat` 结构。
-- 剧本结构预览：按章节分页展示角色、场景、节拍、镜头建议和声音建议。
-- YAML 查看：从结构化剧本对象生成 YAML 文本，便于后续保存和校验。
-- Schema 页面：把字段说明和设计原因整理为可阅读的页面，并支持下载 Schema 文件。
-- Demo 页面：预留视频展示区域，便于后续补充作品演示或操作录屏。
+- 分支：`codex/pr2-polish-homepage-pr-plan`
+- PR 标题：`feat: polish homepage and update PR plan`
+- 状态：已合并
+- 完成内容：
+  - 将首页调整为深色科技感视觉。
+  - 增加背景网格、光效、淡入和上移动画。
+  - 优化首页按钮与功能区域样式。
+  - 更新 README 和开发计划文档。
 
-## 数据结构
+### PR 3：小说输入与章节处理
 
-剧本数据采用 `script -> chapter -> scene -> beat` 的层级结构：
+- 分支：`codex/pr3-novel-input`
+- PR 标题：`feat: add novel input and chapter parsing`
+- 状态：已合并
+- 完成内容：
+  - 增加小说文本输入区和原创示例文本。
+  - 支持“第一章”“第 1 章”“Chapter 1”等章节标题格式。
+  - 增加至少 3 章校验和友好错误提示。
+  - 展示章节序号、标题和正文字符数。
 
-- `script`：承载剧本标题、语言、来源和章节列表。
-- `chapter`：保留小说章节边界，便于追溯原文。
-- `scene`：组织场景地点、时间、人物和剧情作用。
-- `beat`：描述动作、对白、旁白、情绪和转场等最小叙事节拍。
+### PR 4：YAML Schema 设计说明
 
-## 后续可扩展方向
+- 分支：`codex/pr4-yaml-schema-doc`
+- PR 标题：`feat: add screenplay YAML schema and design doc`
+- 状态：已合并
+- 完成内容：
+  - 设计 `script -> chapter -> scene -> beat` 剧本结构。
+  - 新增 `schema/script.schema.yaml`。
+  - 新增字段类型、作用和设计原因说明。
+  - 增加包含章节、场景和 beats 的示例 YAML。
 
-- YAML Schema 校验：在导出前检查字段完整性和类型一致性。
-- 文件导出：支持下载生成后的剧本 YAML 或示例包。
-- 提示词优化：针对不同小说类型调整剧本生成风格。
-- 演示内容补充：在 Demo 页面添加视频链接、操作录屏或示例作品。
-- 视频生成工作流：在已有剧本与分镜字段基础上继续扩展。
+### PR 5：DeepSeek 剧本转换流程
 
-## 提交节奏
+- 分支：`codex/pr5-deepseek-conversion-flow`
+- PR 标题：`feat: add DeepSeek script conversion flow`
+- 状态：已合并
+- 完成内容：
+  - 新增服务端 `/api/convert` 转换接口。
+  - 通过 OpenAI 兼容 SDK 调用 DeepSeek。
+  - 增加 Prompt 模板、模型 JSON 清理和解析工具。
+  - 增加 Mock 模式，未配置真实密钥时也可演示。
+  - 增加角色、章节、场景、beats 和 YAML 预览。
+  - 保证真实 API Key 只从环境变量读取。
 
-项目按功能拆分持续提交，每次合并集中解决一个清晰问题，避免一次性堆叠所有代码。后续如果新增校验、导出、演示视频或视频生成工作流，也会继续按独立功能拆分。
+### PR 6：多页面 UI 与功能整合
+
+- 分支：`codex/pr6-ui-pagination`
+- PR 标题：`feat: ui pagination and final homepage integration`
+- 状态：已合并
+- 完成内容：
+  - 使用 Next.js App Router 拆分首页、转换页和 Schema 页面。
+  - 增加统一页面布局与顶部导航。
+  - 增加剧本章节分页预览。
+  - 将 Schema 设计说明整理为 UI 页面。
+  - 增加 Schema YAML 复制和下载能力。
+
+### PR 7：README 横幅与文档完善
+
+- 分支：`codex/pr7-readme-final-polish`
+- PR 标题：`docs: polish README and add project banner`
+- 状态：已合并
+- 完成内容：
+  - 在 README 开头增加项目横幅图片。
+  - 调整项目定位描述。
+  - 补齐第三方依赖说明。
+  - 检查项目 commit、PR 记录和敏感信息提交情况。
+
+### PR 8：移除 Demo 页面并更新项目文档
+
+- 分支：`codex/pr8-remove-demo-and-refresh-docs`
+- 建议 PR 标题：`refactor: remove demo page and refresh project docs`
+- 状态：本地实现
+- 完成内容：
+  - 从首页和顶部导航移除 Demo 展示入口。
+  - 删除 `/demo` 页面和相关占位内容。
+  - 将首页调整为小说转换与 Schema 两个主要入口。
+  - 扩充 README 的功能、接口、测试、安全和维护说明。
+  - 恢复并完善 PR1 至 PR8 的迭代记录。
+
+## 后续可维护功能
+
+### YAML 导出与校验
+
+- 支持直接下载生成后的剧本 YAML。
+- 在导出前使用 Schema 校验字段类型和必填项。
+- 在页面中展示具体校验路径和修复提示。
+
+### 剧本编辑与保存
+
+- 支持在页面中编辑角色、场景和 beats。
+- 增加浏览器本地草稿保存与恢复。
+- 支持重新排序章节、场景和节拍。
+
+### 生成质量优化
+
+- 按悬疑、都市、古风、科幻等题材拆分提示词模板。
+- 增加生成参数和风格选项。
+- 建立示例集和提示词回归测试，减少角色名、地点和对白识别错误。
+
+### 测试与稳定性
+
+- 为章节解析、JSON 清理和类型校验增加单元测试。
+- 为 `/api/convert` 增加接口测试。
+- 为完整转换流程增加浏览器端到端测试。
+- 增加超时、限流、重试和错误日志处理。
+
+### 视频生成工作流扩展
+
+- 根据 `camera_hint`、`sound_hint` 和 `duration_seconds` 生成分镜清单。
+- 增加角色一致性、场景风格和镜头提示词整理。
+- 保持视频工作流与小说转剧本核心功能解耦，使用独立 PR 逐步实现。
+
+## 后续 PR 提交规范
+
+1. 每个 PR 只新增或修改一个明确功能。
+2. commit message 使用有意义的类型前缀，例如 `feat:`、`fix:`、`docs:`、`refactor:`。
+3. PR 描述至少包含：
+   - 本日完成的功能和修改范围。
+   - 核心实现思路。
+   - 测试方式与验证结果。
+   - 本 PR 未包含的内容。
+4. 合并前运行：
+
+```powershell
+npm run lint
+npm run build
+```
+
+5. 不提交 `.env.local`、API Key、账号、密码、访问令牌或其他敏感信息。

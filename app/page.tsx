@@ -16,13 +16,6 @@ const actionCards = [
     description:
       "查看剧本结构字段说明、设计原因和 YAML Schema 文件，支持复制与下载。",
   },
-  {
-    href: "/demo",
-    title: "查看 Demo 示例",
-    eyebrow: "Demo",
-    description:
-      "进入演示页面，后续可放置作品展示视频、操作录屏或示例讲解链接。",
-  },
 ];
 
 export default function Home() {
@@ -38,11 +31,11 @@ export default function Home() {
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
             把多章节小说整理为结构化剧本草稿，集中管理正文输入、剧本预览、Schema
-            查看和演示资料。
+            查看与 YAML 输出。
           </p>
         </div>
 
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="mx-auto grid w-full max-w-4xl gap-5 md:grid-cols-2">
           {actionCards.map((card) => (
             <HomeActionCard key={card.href} {...card} />
           ))}

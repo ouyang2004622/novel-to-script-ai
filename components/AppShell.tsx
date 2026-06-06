@@ -10,7 +10,6 @@ const navItems = [
   { label: "首页", href: "/" },
   { label: "转换", href: "/convert" },
   { label: "Schema", href: "/schema" },
-  { label: "Demo", href: "/demo" },
 ];
 
 export function AppShell({

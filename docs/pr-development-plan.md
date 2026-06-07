@@ -2,6 +2,8 @@
 
 本项目按照“每个 PR 聚焦一个明确功能”的方式持续迭代。各阶段均保留独立分支、功能 commit、PR 标题和 PR 描述，避免在最后阶段一次性导入全部代码。
 
+最后更新：2026 年 6 月 7 日
+
 ## 已完成 PR
 
 ### PR 1：Next.js 项目初始化
@@ -87,8 +89,8 @@
 ### PR 8：移除 Demo 页面并更新项目文档
 
 - 分支：`codex/pr8-remove-demo-and-refresh-docs`
-- 建议 PR 标题：`refactor: remove demo page and refresh project docs`
-- 状态：本地实现
+- PR 标题：`refactor: remove demo page and refresh project docs`
+- 状态：已合并
 - 完成内容：
   - 从首页和顶部导航移除 Demo 展示入口。
   - 删除 `/demo` 页面和相关占位内容。
@@ -96,11 +98,46 @@
   - 扩充 README 的功能、接口、测试、安全和维护说明。
   - 恢复并完善 PR1 至 PR8 的迭代记录。
 
+### PR 9：生成结果 YAML 下载
+
+- 分支：`codex/pr9-download-generated-yaml`
+- PR 标题：`feat: add YAML download for script drafts`
+- 状态：已合并
+- 完成内容：
+  - 在剧本生成结果的 YAML 区域增加下载按钮，并与复制按钮并列展示。
+  - 使用浏览器 Blob 将当前 YAML 内容下载为本地文件。
+  - 根据剧本标题生成文件名，并过滤 Windows 文件名中的非法字符。
+  - 保持转换接口、剧本预览和 YAML Schema 结构不变。
+- 验证方式：使用示例小说生成剧本，确认 YAML 可复制、可下载且文件内容完整；运行 lint 和生产构建。
+
+### PR 10：README 演示视频入口
+
+- 分支：`codex/pr10-add-demo-video-links`
+- PR 标题：`docs: add project demo video links`
+- 状态：已合并
+- 完成内容：
+  - 在 README 开头的显眼位置增加项目演示视频区域。
+  - 增加 B 站完整演示链接和抖音演示链接。
+  - 保持应用代码、接口和页面功能不变。
+- 验证方式：检查 README 链接渲染与跳转地址，并确认提交只包含文档修改。
+
+### PR 11：持续维护 PR 迭代记录
+
+- 分支：`codex/pr11-update-pr-history`
+- PR 标题：`docs: update PR history and maintenance rules`
+- 状态：已完成
+- 完成内容：
+  - 修正 PR 8 的标题字段和合并状态。
+  - 补充 PR 9、PR 10 和 PR 11 的分支、标题、状态与完成内容。
+  - 明确后续每个 PR 都要同步维护本文件，防止迭代记录再次中断。
+  - 本次只更新迭代文档，不修改 UI、接口或业务逻辑。
+- 验证方式：检查 PR 8 至 PR 11 记录与 GitHub 实际信息一致，并运行 Markdown 差异检查、lint 和生产构建。
+
 ## 后续可维护功能
 
-### YAML 导出与校验
+### YAML 校验与导出体验
 
-- 支持直接下载生成后的剧本 YAML。
+- 已支持直接下载生成后的剧本 YAML，后续可补充导出文件命名和格式选项。
 - 在导出前使用 Schema 校验字段类型和必填项。
 - 在页面中展示具体校验路径和修复提示。
 
@@ -133,16 +170,17 @@
 
 1. 每个 PR 只新增或修改一个明确功能。
 2. commit message 使用有意义的类型前缀，例如 `feat:`、`fix:`、`docs:`、`refactor:`。
-3. PR 描述至少包含：
+3. 每个新 PR 都要同步更新 `docs/pr-development-plan.md`，记录分支、PR 标题、状态、完成内容和测试方式。
+4. PR 描述至少包含：
    - 本日完成的功能和修改范围。
    - 核心实现思路。
    - 测试方式与验证结果。
    - 本 PR 未包含的内容。
-4. 合并前运行：
+5. 合并前运行：
 
 ```powershell
 npm run lint
 npm run build
 ```
 
-5. 不提交 `.env.local`、API Key、账号、密码、访问令牌或其他敏感信息。
+6. 不提交 `.env.local`、API Key、账号、密码、访问令牌或其他敏感信息。
